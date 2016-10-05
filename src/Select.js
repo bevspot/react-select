@@ -2,6 +2,7 @@
    cause conflicts with some open PRs unnecessarily. */
 /* eslint react/jsx-sort-prop-types: 0, react/sort-comp: 0, react/prop-types: 0 */
 
+var getActiveElement = require('fbjs/lib/getActiveElement');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Input = require('react-input-autosize');
@@ -440,7 +441,7 @@ var Select = React.createClass({
 
 	handleInputBlur (event) {
 		var menuDOM = ReactDOM.findDOMNode(this.refs.menu);
-		if (document.activeElement.isEqualNode(menuDOM)) {
+		if (getActiveElement().isEqualNode(menuDOM)) {
 			return;
 		}
 		this._blurTimeout = setTimeout(() => {

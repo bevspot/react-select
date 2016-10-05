@@ -1,6 +1,41 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @typechecks
+ */
+
+/* eslint-disable fb-www/typeof-undefined */
+
+/**
+ * Same as document.activeElement but wraps in a try-catch block. In IE it is
+ * not safe to call document.activeElement if there is nothing focused.
+ *
+ * The activeElement will be null only if the document or document body is not
+ * yet defined.
+ */
+function getActiveElement() /*?DOMElement*/{
+  if (typeof document === 'undefined') {
+    return null;
+  }
+  try {
+    return document.activeElement || document.body;
+  } catch (e) {
+    return document.body;
+  }
+}
+
+module.exports = getActiveElement;
+},{}],2:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var classes = require('classnames');
 
@@ -64,7 +99,7 @@ var Option = React.createClass({
 
 module.exports = Option;
 
-},{"classnames":undefined,"react":undefined}],2:[function(require,module,exports){
+},{"classnames":undefined,"react":undefined}],3:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -93,7 +128,7 @@ var SingleValue = React.createClass({
 
 module.exports = SingleValue;
 
-},{"classnames":undefined,"react":undefined}],3:[function(require,module,exports){
+},{"classnames":undefined,"react":undefined}],4:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -189,6 +224,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var getActiveElement = require('fbjs/lib/getActiveElement');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Input = require('react-input-autosize');
@@ -629,7 +665,7 @@ var Select = React.createClass({
 		var _this7 = this;
 
 		var menuDOM = ReactDOM.findDOMNode(this.refs.menu);
-		if (document.activeElement.isEqualNode(menuDOM)) {
+		if (getActiveElement().isEqualNode(menuDOM)) {
 			return;
 		}
 		this._blurTimeout = setTimeout(function () {
@@ -1127,4 +1163,4 @@ var Select = React.createClass({
 
 module.exports = Select;
 
-},{"./Option":1,"./SingleValue":2,"./Value":3,"classnames":undefined,"react":undefined,"react-dom":undefined,"react-input-autosize":undefined}]},{},[]);
+},{"./Option":2,"./SingleValue":3,"./Value":4,"classnames":undefined,"fbjs/lib/getActiveElement":1,"react":undefined,"react-dom":undefined,"react-input-autosize":undefined}]},{},[]);
