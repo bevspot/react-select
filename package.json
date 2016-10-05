@@ -1,6 +1,6 @@
 {
-  "name": "react-select",
-  "version": "0.9.1",
+  "name": "bevspot-react-select",
+  "version": "0.9.1-bug-fix",
   "description": "A Select control built with and for ReactJS",
   "main": "lib/Select.js",
   "style": "dist/default.css",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JedWatson/react-select.git"
+    "url": "https://github.com/bevspot/react-select"
   },
   "dependencies": {
     "classnames": "^2.2.0",
